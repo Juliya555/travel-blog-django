@@ -9,7 +9,7 @@ This is a travel blog with best places to visit in the world.
   ```
 2. Clone the repository:
   ```
-  git clone https://github.com/Juliya555/hello_travel.git
+  git clone https://github.com/Juliya555/travel_blog.git
   ```
 3. Install all requirements:
   ```
