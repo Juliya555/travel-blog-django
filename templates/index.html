@@ -1,0 +1,222 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Hello Travel :: Travel Blog Pet Project =)</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--[if lte IE 8]><script src= "{% static "js/ie/html5shiv.js" %}"></script><![endif]-->
+    <link rel="stylesheet" href="{% static "css/main.css" %}"/>
+    <!--[if lte IE 8]><link rel="stylesheet" href= "{% static "css/ie8.css" %}"/><![endif]-->
+    <link rel="shortcut icon" href="{% static  "img/favicon.ico" %}" type="image/x-icon">
+</head>
+<body class="homepage">
+
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <div id="header">
+
+        <!-- Inner -->
+        <div class="inner">
+            <header>
+                <h1><a href="{% url 'index' %}" id="logo">Hello travel</a></h1>
+                <hr/>
+                <p>PLACES YOU NEED TO VISIT IN 2018</p>
+            </header>
+            <footer>
+                <a href="#banner" class="button circled scrolly">Start</a>
+            </footer>
+        </div>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <!-- Banner -->
+    <section id="banner">
+        <header>
+            <h2>Looking for your next adventure?</h2>
+            <p>
+                Discover new trails, taste local foods, and spot vibrant wildlife around the world!
+            </p>
+        </header>
+    </section>
+
+    <!-- Carousel -->
+    <section class="carousel">
+        <div class="reel">
+
+            <article>
+                <a class="image featured"><img src="{% static "img/carousel/best-2017-pod-01.jpg" %}" alt=""/></a>
+                <header>
+                    <h3>GRADUATION CELEBRATION</h3>
+                </header>
+                <p>Graduates of the US Air Force Academy in Colorado Springs, Colorado.</p>
+            </article>
+
+            <article>
+                <a class="image featured"><img src="{% static "img/carousel/best-2017-pod-02.jpg" %}" alt=""/></a>
+                <header>
+                    <h3>LILY HARVEST</h3>
+                </header>
+                <p>In Vietnam's Mekong Delta, a woman harvests water lilies.</p>
+            </article>
+
+            <article>
+                <a class="image featured"><img src="{% static "img/carousel/best-2017-pod-03.jpg" %}" alt=""/></a>
+                <header>
+                    <h3>BACKYARD BEAUTY</h3>
+                </header>
+                <p>The long winter nights of Lapland, Sweden showcase.</p>
+            </article>
+
+            <article>
+                <a class="image featured"><img src="{% static "img/carousel/best-2017-pod-04.jpg" %}" alt=""/></a>
+                <header>
+                    <h3>SUDDENLY SOAKED</h3>
+                </header>
+                <p>Life goes on despite the steady monsoon rain in Kolkata, India.</p>
+            </article>
+
+            <article>
+                <a class="image featured"><img src="{% static "img/carousel/best-2017-pod-05.jpg" %}" alt=""/></a>
+
+                <header>
+                    <h3>CACTI ON THE ROOFTOP</h3>
+                </header>
+                <p>A full view of Templo de Santo Domingo on the rooftop, Mexico.</p>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Form -->
+    <section>
+        <div class="wrapper style2">
+            <article id="main" class="container special">
+
+                <div class="mail-block">
+                    <p>Please, leave your email and get info about 7 World's Best Cities to Visit!</p>
+                </div>
+
+
+                <form method="POST" action="{% url 'mail' %}"> {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" class="button" value="Send">
+
+                </form>
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- Main -->
+    <div class="wrapper style2">
+
+        <article id="main" class="container special">
+            <a class="image featured"><img src="{% static "img/gallery/00_header.jpg" %}" alt=""/></a>
+            <header>
+                <h2>TOP 21 places for visiting in 2018!</h2>
+                <p>
+                    With a world full of fascinating destinations, choosing the perfect place to vacation can present a
+                    challenge.
+                    Learrn current trends in this list.
+                </p>
+            </header>
+
+            <div class="container">
+
+
+                {% for place in places %}
+                    <div class="place">
+
+                        {% for image in place.placeimage_set.all %}
+
+                            <div class="image">
+
+                                <a class="image"><img src="static{{ image.image.url }}" class="img-responsive"
+                                                      alt="Image01"></a>
+                                <div class="hbd-over_image-number">{{ place.position_number }}/21</div>
+                                <div class="hbd-over_image-title">{{ place.name }}</div>
+
+                            </div>
+
+                        {% endfor %}
+
+
+                        <div class="container">
+                            <span class="gallery-title">{{ place.name }}</span>
+                            <p>
+                                <span class="caption-kicker">WHY GO NOW:</span> {{ place.why_go_description }}
+                            </p>
+                            <p>
+                                {{ place.description }}
+                            </p>
+                            <p>
+                                <span class="caption-kicker">FUN FACT:</span> {{ place.fun_fact_description }}
+                            </p>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+
+        <div class="row">
+            <div class="12u">
+
+                <!-- Contact -->
+                <section class="contact">
+                    <header>
+                        <h3>Want to connect?</h3>
+                    </header>
+                    <p>Please, join us!</p>
+                    <ul class="icons">
+                        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+                        <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+                        <li><a href="#" class="icon fa-linkedin"><span class="label">Linkedin</span></a></li>
+                    </ul>
+                </section>
+
+
+                <!-- Copyright -->
+                <div class="copyright">
+                    <ul class="menu">
+                        <li>&copy; Hello Travel. All rights reserved.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- Scripts -->
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script src="{% static "js/jquery.dropotron.min.js" %}"></script>
+<script src="{% static "js/jquery.scrolly.min.js" %}"></script>
+<script src="{% static "js/jquery.onvisible.min.js" %}"></script>
+<script src="{% static "js/skel.min.js" %}"></script>
+<script src="{% static "js/util.js" %}"></script>
+<!--[if lte IE 8]><script src="{% static "js/ie/respond.min.js" %}"></script><![endif]-->
+<script src="{% static "js/main.js" %}"></script>
+
+</body>
+</html>
